@@ -2,7 +2,6 @@ package cn.xpbootcamp.gilded_rose;
 
 public class Locker {
     private int capacity;
-    private  int
 
     public Locker(int capacity) {
         this.capacity = capacity;
