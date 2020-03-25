@@ -11,15 +11,25 @@ public class LockerTest {
         Locker locker = new Locker(capacity);
         Ticket ticket = locker.save();
         assertNotNull(ticket);
-        assertEquals(capacity-1, locker.availableBoxSize());
+        assertEquals(capacity - 1, locker.availableBoxSize());
     }
 
     @Test
-    void should_return_ticket_Failed_when_save_a_package_in_1_locker_given_there_is_0_empty_box() {
+    void should_return_ticket_failed_when_save_a_package_in_1_locker_given_there_is_0_empty_box() {
         int capacity = 0;
         Locker locker = new Locker(capacity);
         Ticket ticket = locker.save();
         assertNull(ticket);
         assertEquals(0, locker.availableBoxSize());
+    }
+
+    @Test
+    void should_take_package_failed_and_return_warning_when_take_a_package_given_there_is_all_box_available() {
+        int capacity = 19;
+        Locker locker = new Locker(capacity);
+        Ticket ticket = new Ticket();
+        String result = locker.takePackage(ticket);
+        assertEquals("没有存储的包裹", result);
+        assertEquals(capacity, locker.availableBoxSize());
     }
 }
