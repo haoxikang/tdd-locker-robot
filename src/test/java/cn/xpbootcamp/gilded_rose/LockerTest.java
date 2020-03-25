@@ -45,7 +45,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_take_package_successfully_and_open_the_match_box_when_given_a_right_ticket() {
+    void should_take_package_successfully_and_open_the_match_box_when_take_a_package_given_a_right_ticket() {
         int capacity = 19;
         Locker locker = new Locker(capacity);
         Ticket ticket = locker.save();
@@ -56,5 +56,16 @@ public class LockerTest {
         assertEquals(capacity, locker.availableBoxSize());
     }
 
+    @Test
+    void should_take_package_failed_and_open_the_match_box_when_take_a_package_given_a_incorrect_ticket() {
+        int capacity = 19;
+        Locker locker = new Locker(capacity);
+        Ticket ticket = locker.save();
+        assertEquals(capacity - 1, locker.availableBoxSize());
+
+        String result = locker.takePackage(new Ticket("test",ticket.getBoxNumber()));
+        assertEquals("没有存储的包裹", result);
+        assertEquals(capacity - 1, locker.availableBoxSize());
+    }
 
 }
