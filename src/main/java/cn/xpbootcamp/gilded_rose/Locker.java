@@ -23,4 +23,8 @@ public class Locker {
     public int availableBoxSize() {
         return availableBoxCount;
     }
+
+    public String takePackage(Ticket ticket) {
+        return "没有存储的包裹";
+    }
 }
