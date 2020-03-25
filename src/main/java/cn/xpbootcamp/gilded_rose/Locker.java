@@ -2,12 +2,15 @@ package cn.xpbootcamp.gilded_rose;
 
 public class Locker {
     private int capacity;
+    private int availableBoxCount;
 
     public Locker(int capacity) {
         this.capacity = capacity;
+        availableBoxCount = capacity;
     }
 
-    public static Ticket save() {
+    public Ticket save() {
+        availableBoxCount--;
         return new Ticket();
     }
 
@@ -16,6 +19,6 @@ public class Locker {
     }
 
     public int availableBoxSize() {
-        return getCapacity();
+        return availableBoxCount;
     }
 }
