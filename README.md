@@ -1,6 +1,5 @@
 # TDD「Locker Robot」
 Given 19个空柜子 When 用户开1个柜子存包 Then 成功出票1个，存包成功，空柜子-1
-Given 1个空柜子 When 用户开1个柜子存包 Then 成功出票1个，存包成功，空柜子-1
 Given 0个空柜子 When 用户开1个柜子存包 Then 出票失败，存包失败，空柜子0
 
 Given 19个空柜子 When 用户取包 Then 检票失败，系统提醒‘没有存储包裹’  空柜子不变
