@@ -10,6 +10,8 @@ public class Locker {
     }
 
     public Ticket save() {
+        if (availableBoxCount == 0)
+            return null;
         availableBoxCount--;
         return new Ticket();
     }
