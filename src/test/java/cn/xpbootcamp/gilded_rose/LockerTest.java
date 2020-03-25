@@ -43,4 +43,17 @@ public class LockerTest {
         assertEquals("取包失败", result);
         assertEquals(capacity, locker.availableBoxSize());
     }
+    @Test
+    void should_take_package_successfully_and_return_message_with_box_number_1_when_take_a_package_given_number_1_ticket() {
+        int capacity = 19;
+        Locker locker = new Locker(capacity);
+        Ticket ticket = locker.save();
+        assertEquals(capacity - 1, locker.availableBoxSize());
+
+        String result = locker.takePackage(ticket);
+        assertEquals("1号柜子打开成功", result);
+        assertEquals(capacity, locker.availableBoxSize());
+    }
+
+
 }
