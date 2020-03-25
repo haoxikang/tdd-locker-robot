@@ -25,6 +25,9 @@ public class Locker {
     }
 
     public String takePackage(Ticket ticket) {
+        if (ticket.isUsed()) {
+            return "取包失败";
+        }
         return "没有存储的包裹";
     }
 }
