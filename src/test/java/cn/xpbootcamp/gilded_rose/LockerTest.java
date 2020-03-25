@@ -32,4 +32,15 @@ public class LockerTest {
         assertEquals("没有存储的包裹", result);
         assertEquals(capacity, locker.availableBoxSize());
     }
+
+    @Test
+    void should_take_package_failed_and_return_warning_when_take_a_package_given_a_used_ticket() {
+        int capacity = 19;
+        Locker locker = new Locker(capacity);
+        Ticket ticket = new Ticket();
+        ticket.check();
+        String result = locker.takePackage(ticket);
+        assertEquals("取包失败", result);
+        assertEquals(capacity, locker.availableBoxSize());
+    }
 }
