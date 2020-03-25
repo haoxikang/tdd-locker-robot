@@ -45,7 +45,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_take_package_successfully_and_return_message_with_box_number_1_when_take_a_package_given_number_1_ticket() {
+    void should_take_package_successfully_and_open_the_match_box_when_given_a_right_ticket() {
         int capacity = 19;
         Locker locker = new Locker(capacity);
         Ticket ticket = locker.save();
