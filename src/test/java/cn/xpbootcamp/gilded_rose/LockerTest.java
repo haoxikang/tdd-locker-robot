@@ -77,6 +77,18 @@ public class LockerTest {
         Ticket ticket = locker.save();
         assertEquals(capacity - 1, locker.availableBoxSize());
     }
+
+    @Test
+    void should_left_19_empty_boxes_when_take_a_package_given_there_are_18_box_available(){
+        int capacity = 18;
+        Locker locker = new Locker(capacity);
+
+        Ticket ticket = new Ticket("12345678","2");
+        String result = locker.takePackage(ticket);
+
+        assertEquals("打开" + ticket.getBoxNumber() + "号箱子", result);
+        assertEquals(capacity + 1, locker.availableBoxSize());
+    }
     
 
 }
