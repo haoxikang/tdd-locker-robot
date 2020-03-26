@@ -68,4 +68,15 @@ public class LockerTest {
         assertEquals(capacity - 1, locker.availableBoxSize());
     }
 
+    @Test
+    void should_return_ticket_successfully_when_save_a_package_in_1_locker_given_there_is_1_empty_box(){
+
+        int capacity = 1;
+        Locker locker = new Locker(capacity);
+
+        Ticket ticket = locker.save();
+        assertEquals(capacity - 1, locker.availableBoxSize());
+    }
+    
+
 }
