@@ -11,7 +11,16 @@ public class Locker {
     private List<Box> boxes;
 
 
-    public Locker(int capacity) {
+
+    public Locker(String lockerNumber, int capacity) {
+        this.capacity = capacity;
+        boxes = new ArrayList<>();
+        for (int i = 0; i < capacity; i++) {
+            boxes.add(new Box("" + (i + 1)));
+        }
+    }
+
+    public Locker( int capacity) {
         this.capacity = capacity;
         boxes = new ArrayList<>();
         for (int i = 0; i < capacity; i++) {
