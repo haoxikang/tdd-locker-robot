@@ -76,7 +76,7 @@ public class PrimaryLockerRobotTest {
     void should_take_packages_successfully_when_take_packages_with_right_ticket_given_user_has_save_packages(){
 
         int totalLockers = 3;
-        List<Integer> lockerCapacity = Arrays.asList(12,24,24);
+        List<Integer> lockerCapacity = Arrays.asList(0,0,20);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(totalLockers,lockerCapacity);
 
         Ticket ticket = primaryLockerRobot.savePackage();

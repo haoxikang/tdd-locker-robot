@@ -49,9 +49,6 @@ public class Locker {
         return new Ticket(id,box.getBoxNumber(),lockerNumber);
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
 
     public int availableBoxSize() {
         List<Box> availableBoxes = getAvailableBoxes();
@@ -59,11 +56,9 @@ public class Locker {
     }
 
     public String takePackage(Ticket ticket) {
-        if (ticket.isUsed()) {
-            return "无效票";
-        }
+
         Box box = getUnavailableBoxById(ticket.getId());
-        if (box == null) {
+        if (box == null || ticket.isUsed()) {
             return "无效票";
         }
         ticket.check();
