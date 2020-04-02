@@ -113,9 +113,24 @@ public class PrimaryLockerRobotTest {
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(totalLockers,lockerCapacity);
         Ticket ticket = primaryLockerRobot.savePackage();
 
-        String actualResult = primaryLockerRobot.takePackage(new Ticket("faketicket",ticket.getBoxNumber()));
+        String actualResult = primaryLockerRobot.takePackage(new Ticket("faketicket",ticket.getBoxNumber(),ticket.getLockerNumber()));
         String expectedResult = "无效票";
         assertEquals(actualResult,expectedResult);
+    }
+
+    @Test
+    void should_save_packages_in_first_locker_when_save_packages_given_only_the_last_has_empty_boxes_and_userA_take_packages_from_the_first_locker(){
+
+        int totalLockers = 3;
+        List<Integer> lockerCapacity = Arrays.asList(1,0,21);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(totalLockers,lockerCapacity);
+        Ticket ticketForA = primaryLockerRobot.savePackage();
+        primaryLockerRobot.takePackage(ticketForA);
+
+        Ticket ticketForB = primaryLockerRobot.savePackage();
+        assertNotNull(ticketForB);
+        assertEquals(ticketForB.getLockerNumber(),"1");
+
     }
 
 }

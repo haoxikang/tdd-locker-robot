@@ -4,10 +4,17 @@ public class Ticket {
     private boolean isUsed = false;
     private String id;
     private String boxNumber;
+    private String lockerNumber;
 
     public Ticket(String id, String boxNumber) {
         this.id = id;
         this.boxNumber = boxNumber;
+    }
+
+    public Ticket(String id, String boxNumber, String lockerNumber) {
+        this.id = id;
+        this.boxNumber = boxNumber;
+        this.lockerNumber = lockerNumber;
     }
 
 
@@ -25,5 +32,9 @@ public class Ticket {
 
     public String getBoxNumber() {
         return boxNumber;
+    }
+
+    public String getLockerNumber() {
+        return lockerNumber;
     }
 }

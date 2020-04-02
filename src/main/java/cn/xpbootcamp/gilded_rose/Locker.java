@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class Locker {
     private int capacity;
+    private String lockerNumber;
 
     private List<Box> boxes;
 
@@ -36,6 +37,16 @@ public class Locker {
         String id = box.save();
 
         return new Ticket(id,box.getBoxNumber());
+    }
+
+    public Ticket save(String lockerNumber) {
+        if (availableBoxSize() == 0)
+            return null;
+
+        Box box = getAvailableBox();
+        String id = box.save();
+
+        return new Ticket(id,box.getBoxNumber(),lockerNumber);
     }
 
     public int getCapacity() {
