@@ -57,8 +57,8 @@ public class Locker {
         }
         ticket.check();
         box.open();
-        return "打开"+box.getBoxNumber()+"号箱子";
-
+//        return "打开"+box.getBoxNumber()+"号箱子";
+        return box.getBoxNumber()+"号箱子";
 
     }
 
