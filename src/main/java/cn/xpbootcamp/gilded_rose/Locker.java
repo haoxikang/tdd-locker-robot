@@ -49,16 +49,16 @@ public class Locker {
 
     public String takePackage(Ticket ticket) {
         if (ticket.isUsed()) {
-            return "取包失败";
+            return "无效票";
         }
         Box box = getUnavailableBoxById(ticket.getId());
         if (box == null) {
-            return "没有存储的包裹";
+            return "无效票";
         }
         ticket.check();
         box.open();
 //        return "打开"+box.getBoxNumber()+"号箱子";
-        return box.getBoxNumber()+"号箱子";
+        return "取包成功";
 
     }
 

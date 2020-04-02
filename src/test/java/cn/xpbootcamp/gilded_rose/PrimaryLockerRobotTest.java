@@ -86,4 +86,36 @@ public class PrimaryLockerRobotTest {
         assertEquals(actualResult.contains(expectedResult),true);
     }
 
+    @Test
+    void should_take_packages_failed_when_take_packages_twice_with_right_ticket_given_user_save_packages_once(){
+
+        int totalLockers = 3;
+        List<Integer> lockerCapacity = Arrays.asList(12,24,24);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(totalLockers,lockerCapacity);
+
+        Ticket ticket = primaryLockerRobot.savePackage();
+        String actualResult = primaryLockerRobot.takePackage(ticket);
+        String expectedResult = "取包成功";
+        assertEquals(actualResult, expectedResult);
+
+
+        actualResult =primaryLockerRobot.takePackage(ticket);
+        expectedResult = "无效票";
+
+        assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    void should_take_packages_failed_when_take_packages_with_fake_ticket_given_user_save_packages_once(){
+
+        int totalLockers = 3;
+        List<Integer> lockerCapacity = Arrays.asList(12,24,24);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(totalLockers,lockerCapacity);
+        Ticket ticket = primaryLockerRobot.savePackage();
+
+        String actualResult = primaryLockerRobot.takePackage(new Ticket("faketicket",ticket.getBoxNumber()));
+        String expectedResult = "无效票";
+        assertEquals(actualResult,expectedResult);
+    }
+
 }
