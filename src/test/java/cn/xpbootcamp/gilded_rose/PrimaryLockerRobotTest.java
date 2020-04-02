@@ -14,10 +14,24 @@ public class PrimaryLockerRobotTest {
     @Test
     void should_return_ticket_successfully_when_the_first_locker_has_2_empty_box(){
         int totalLockers = 3;
-        List lockerCapacity = Arrays.asList(2,20,24);
+        List<Integer> lockerCapacity = Arrays.asList(2,20,24);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(totalLockers,lockerCapacity);
         Ticket ticket = primaryLockerRobot.savePackage();
 
         assertNotNull(ticket);
+    }
+
+    @Test
+    void should_save_package_in_the_second_locker_when_the_first_locker_is_full_and_the_second_locker_has_2_empty_box(){
+
+        int totalLockers = 3;
+        List<Integer> lockerCapacity = Arrays.asList(1,2,24);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(totalLockers,lockerCapacity);
+        Ticket ticket1 = primaryLockerRobot.savePackage();
+        assertNotNull(ticket1);
+
+        Ticket ticket2 = primaryLockerRobot.savePackage();
+        assertNotNull(ticket2);
+
     }
 }
