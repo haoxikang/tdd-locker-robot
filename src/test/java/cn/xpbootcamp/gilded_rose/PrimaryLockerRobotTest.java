@@ -47,4 +47,15 @@ public class PrimaryLockerRobotTest {
 
     }
 
+    @Test
+    void should_save_package_failed_when_save_a_package_given_there_is_0_empty_boxes(){
+
+        int totalLockers = 3;
+        List<Integer> lockerCapacity = Arrays.asList(0,0,0);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(totalLockers,lockerCapacity);
+
+        Ticket ticket = primaryLockerRobot.savePackage();
+        assertNull(ticket);
+    }
+
 }
