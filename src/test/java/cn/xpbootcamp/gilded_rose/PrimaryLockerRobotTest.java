@@ -10,61 +10,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PrimaryLockerRobotTest {
 
-    private List<Locker> createLockersByLockerCapacities(List<Integer> capacities) {
-        return capacities.stream().map(Locker::new)
-                .collect(Collectors.toList());
-    }
+
+
+
 
     @Test
-    void should_return_ticket_successfully_when_save_packages_given_the_first_locker_has_2_empty_box() {
-        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(createLockersByLockerCapacities(List.of(2, 20, 24)));
+    void should_save_packages_successfully_in_locker_1_when_user_save_a_pag_given_three_lockers_which_has_tantamount_box(){
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(createLockersByLockerCapacities(List.of(20, 20, 20)));
         Ticket ticket = primaryLockerRobot.savePackage();
-
-        assertNotNull(ticket);
-    }
-
-    @Test
-    void should_save_package_in_the_second_locker_when_save_packages_given_the_first_locker_is_full_and_the_second_locker_has_2_empty_box() {
-
-        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(createLockersByLockerCapacities(List.of(1, 2, 24)));
-        Ticket ticket1 = primaryLockerRobot.savePackage();
-        assertNotNull(ticket1);
-
-        Ticket ticket2 = primaryLockerRobot.savePackage();
-        assertNotNull(ticket2);
+        assertEquals(ticket.getLockerPosition(),0);
 
     }
 
-    @Test
-    void should_save_package_in_the_last_locker_when_save_packages_given_only_the_last_locker_has_all_empty_boxes() {
-
-        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(createLockersByLockerCapacities(List.of(0, 0, 24)));
-
-        Ticket ticket = primaryLockerRobot.savePackage();
-        assertNotNull(ticket);
-
-    }
-
-    @Test
-    void should_save_package_failed_when_save_packages_given_there_is_0_empty_boxes() {
-
-        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(createLockersByLockerCapacities(List.of(0, 0, 0)));
-
-        Ticket ticket = primaryLockerRobot.savePackage();
-        assertNull(ticket);
-    }
-
-    @Test
-    void should_save_1_successfully_and_1_failed_when_2_users_save_packages_given_there_is_1_empty_boxes() {
-
-        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(createLockersByLockerCapacities(List.of(0, 0, 1)));
-
-        Ticket ticketForA = primaryLockerRobot.savePackage();
-        assertNotNull(ticketForA);
-
-        Ticket ticketForB = primaryLockerRobot.savePackage();
-        assertNull(ticketForB);
-    }
+//    @Test
+//    void should_save_packages_successfully_in_locker_which_with_the_most_available_box_when_user_save_a_pag_given_multiple_lockers(){
+//
+//    }
+//
+//    @Test
+//    void should_save_packages_failed_when_user_save_a_pag_given_multiple_lockers_given_three_lockers_which_all_not_empty(){
+//
+//    }
 
     @Test
     void should_take_packages_successfully_when_take_packages_with_right_ticket_given_user_has_save_packages() {
@@ -118,5 +84,8 @@ public class PrimaryLockerRobotTest {
         assertEquals(ticketForB.getLockerPosition(), 0);
 
     }
-
+    private List<Locker> createLockersByLockerCapacities(List<Integer> capacities) {
+        return capacities.stream().map(Locker::new)
+                .collect(Collectors.toList());
+    }
 }
