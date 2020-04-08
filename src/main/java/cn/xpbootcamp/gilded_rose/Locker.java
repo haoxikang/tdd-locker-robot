@@ -9,8 +9,18 @@ public class Locker {
 
     private List<Box> boxes;
 
+    private int lockerPosition;
+
 
     public Locker(int capacity) {
+        boxes = new ArrayList<>();
+        for (int i = 0; i < capacity; i++) {
+            boxes.add(new Box("" + (i + 1)));
+        }
+    }
+
+    public Locker(int capacity,int lockerPosition) {
+        this.lockerPosition = lockerPosition;
         boxes = new ArrayList<>();
         for (int i = 0; i < capacity; i++) {
             boxes.add(new Box("" + (i + 1)));
@@ -24,18 +34,9 @@ public class Locker {
         Box box = getAvailableBox();
         String id = box.save();
 
-        return new Ticket(id, box.getBoxNumber());
+        return new Ticket(id, box.getBoxNumber(),lockerPosition);
     }
 
-    public Ticket save(int lockerPosition) {
-        if (availableBoxSize() == 0)
-            return null;
-
-        Box box = getAvailableBox();
-        String id = box.save();
-
-        return new Ticket(id, box.getBoxNumber(), lockerPosition);
-    }
 
 
     public int availableBoxSize() {

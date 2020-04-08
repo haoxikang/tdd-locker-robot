@@ -14,13 +14,14 @@ public class PrimaryLockerRobot {
     }
 
     public Ticket savePackage() {
-        for (int i = 0; i < lockers.size(); i++) {
-            Locker locker = lockers.get(i);
-            if (locker.availableBoxSize() > 0) {
-                return locker.save(i);
-            }
-        }
-        return null;
+        return lockers.stream()
+                .max((a, b) -> {
+                    if (a.availableBoxSize() >= b.availableBoxSize()) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }).get().save();
     }
 
     public String takePackage(Ticket ticket) {
