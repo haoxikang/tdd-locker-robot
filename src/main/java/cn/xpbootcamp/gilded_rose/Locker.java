@@ -6,23 +6,11 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Locker {
-    private int capacity;
-    private String lockerNumber;
 
     private List<Box> boxes;
 
 
-
-    public Locker(String lockerNumber, int capacity) {
-        this.capacity = capacity;
-        boxes = new ArrayList<>();
-        for (int i = 0; i < capacity; i++) {
-            boxes.add(new Box("" + (i + 1)));
-        }
-    }
-
-    public Locker( int capacity) {
-        this.capacity = capacity;
+    public Locker(int capacity) {
         boxes = new ArrayList<>();
         for (int i = 0; i < capacity; i++) {
             boxes.add(new Box("" + (i + 1)));
@@ -36,17 +24,17 @@ public class Locker {
         Box box = getAvailableBox();
         String id = box.save();
 
-        return new Ticket(id,box.getBoxNumber());
+        return new Ticket(id, box.getBoxNumber());
     }
 
-    public Ticket save(String lockerNumber) {
+    public Ticket save(int lockerPosition) {
         if (availableBoxSize() == 0)
             return null;
 
         Box box = getAvailableBox();
         String id = box.save();
 
-        return new Ticket(id,box.getBoxNumber(),lockerNumber);
+        return new Ticket(id, box.getBoxNumber(), lockerPosition);
     }
 
 

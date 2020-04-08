@@ -4,17 +4,17 @@ public class Ticket {
     private boolean isUsed = false;
     private String id;
     private String boxNumber;
-    private String lockerNumber;
+    private int lockerPosition;
 
     public Ticket(String id, String boxNumber) {
         this.id = id;
         this.boxNumber = boxNumber;
     }
 
-    public Ticket(String id, String boxNumber, String lockerNumber) {
+    public Ticket(String id, String boxNumber,int lockerPosition) {
         this.id = id;
         this.boxNumber = boxNumber;
-        this.lockerNumber = lockerNumber;
+        this.lockerPosition = lockerPosition;
     }
 
 
@@ -34,7 +34,7 @@ public class Ticket {
         return boxNumber;
     }
 
-    public String getLockerNumber() {
-        return lockerNumber;
+    public int getLockerPosition() {
+        return lockerPosition;
     }
 }

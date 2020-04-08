@@ -29,7 +29,7 @@ public class LockerTest {
         Locker locker = new Locker(capacity);
         Ticket ticket = new Ticket("test", "1");
         String result = locker.takePackage(ticket);
-        assertEquals("没有存储的包裹", result);
+        assertEquals("无效票", result);
         assertEquals(capacity, locker.availableBoxSize());
     }
 
@@ -40,7 +40,7 @@ public class LockerTest {
         Ticket ticket = new Ticket("test", "1");
         ticket.check();
         String result = locker.takePackage(ticket);
-        assertEquals("取包失败", result);
+        assertEquals("无效票", result);
         assertEquals(capacity, locker.availableBoxSize());
     }
 
@@ -52,7 +52,7 @@ public class LockerTest {
         assertEquals(capacity - 1, locker.availableBoxSize());
 
         String result = locker.takePackage(ticket);
-        assertEquals("打开" + ticket.getBoxNumber() + "号箱子", result);
+        assertEquals("取包成功", result);
         assertEquals(capacity, locker.availableBoxSize());
     }
 
@@ -64,7 +64,7 @@ public class LockerTest {
         assertEquals(capacity - 1, locker.availableBoxSize());
 
         String result = locker.takePackage(new Ticket("test",ticket.getBoxNumber()));
-        assertEquals("没有存储的包裹", result);
+        assertEquals("无效票", result);
         assertEquals(capacity - 1, locker.availableBoxSize());
     }
 
@@ -88,7 +88,7 @@ public class LockerTest {
         String result = locker.takePackage(ticket);
 
         assertEquals(capacity, locker.availableBoxSize());
-        assertEquals("打开" + ticket.getBoxNumber() + "号箱子", result);
+        assertEquals("取包成功", result);
     }
 
 }
