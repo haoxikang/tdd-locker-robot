@@ -19,4 +19,8 @@ public class SuperLockerRobot {
         return lockers.stream().max(Comparator.comparing(Locker::getVacancyRate)).get();
     }
 
+    public String takePackage(Ticket ticket) {
+        int lockerPosition = ticket.getLockerPosition();
+        return lockers.get(lockerPosition).takePackage(ticket);
+    }
 }
