@@ -37,6 +37,15 @@ public class Locker {
         return new Ticket(id, box.getBoxNumber(),lockerPosition);
     }
 
+    public Ticket save(Bag bag) {
+        if (availableBoxSize() == 0)
+            return null;
+
+        Box box = getAvailableBox();
+        String id = box.save(bag);
+
+        return new Ticket(id, box.getBoxNumber(),lockerPosition);
+    }
 
 
     public int availableBoxSize() {
@@ -76,5 +85,12 @@ public class Locker {
                 .filter(box -> box.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public double getVacancyRate() {
+        int capacity = boxes.size();
+        return Math.round((
+                (double)availableBoxSize()/capacity * 100.0)/100.0
+        );
     }
 }

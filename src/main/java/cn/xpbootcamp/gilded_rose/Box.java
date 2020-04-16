@@ -23,6 +23,12 @@ public class Box {
         return id;
     }
 
+    String save(Bag bag) {
+        isAvailable = false;
+        id = UUID.randomUUID().toString();
+        return id;
+    }
+
     void open() {
         isAvailable = true;
         id = null;
