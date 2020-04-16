@@ -89,8 +89,8 @@ public class Locker {
 
     public double getVacancyRate() {
         int capacity = boxes.size();
-        return Math.round((
+        return Math.round(
                 (double)availableBoxSize()/capacity * 100.0)/100.0
-        );
+        ;
     }
 }
