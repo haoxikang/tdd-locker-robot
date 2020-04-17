@@ -19,6 +19,7 @@ public class SuperLockerRobotTest {
         Ticket ticket = superLockerRobot.save(bag);
         assertNotNull(ticket);
         assertEquals(0,ticket.getLockerPosition());
+        assertEquals(bag, superLockerRobot.takeBag(ticket));
     }
 
     @Test
@@ -65,11 +66,12 @@ public class SuperLockerRobotTest {
 
         SuperLockerRobot superLockerRobot = new SuperLockerRobot(createLockersByCapacities(List.of(0, 0, 20)));
 
-        Ticket ticket = superLockerRobot.save(new Bag());
+        Bag expectedBag= new Bag();
+        Ticket ticket = superLockerRobot.save(expectedBag);
 
-        String actualResult = superLockerRobot.takePackage(ticket);
-        String expectedResult = "取包成功";
-        assertTrue(actualResult.contains(expectedResult));
+        Bag actualBag = superLockerRobot.takeBag(ticket);
+
+        assertEquals(expectedBag,actualBag);
     }
 
     @Test
@@ -77,27 +79,25 @@ public class SuperLockerRobotTest {
 
         SuperLockerRobot superLockerRobot = new SuperLockerRobot(createLockersByCapacities(List.of(12, 24, 24)));
 
-        Ticket ticket = superLockerRobot.save(new Bag());
-        String actualResult = superLockerRobot.takePackage(ticket);
-        String expectedResult = "取包成功";
-        assertEquals(actualResult, expectedResult);
+        Bag expectedBag= new Bag();
+        Ticket ticket = superLockerRobot.save(expectedBag);
+        Bag actualBag = superLockerRobot.takeBag(ticket);
 
+        assertEquals(expectedBag, actualBag);
 
-        actualResult = superLockerRobot.takePackage(ticket);
-        expectedResult = "无效票";
-
-        assertEquals(actualResult, expectedResult);
+        assertNull(superLockerRobot.takeBag(ticket));
     }
 
     @Test
     void should_take_packages_failed_when_take_packages_with_fake_ticket_given_user_save_packages_once() {
 
         SuperLockerRobot superLockerRobot = new SuperLockerRobot(createLockersByCapacities(List.of(12, 24, 24)));
-        Ticket ticket = superLockerRobot.save(new Bag());
+        Bag expectedBag= new Bag();
+        Ticket ticket = superLockerRobot.save(expectedBag);
 
-        String actualResult = superLockerRobot.takePackage(new Ticket("faketicket", ticket.getBoxNumber(), ticket.getLockerPosition()));
-        String expectedResult = "无效票";
-        assertEquals(actualResult, expectedResult);
+        Bag actualBag = superLockerRobot.takeBag(new Ticket("faketicket", ticket.getBoxNumber(), ticket.getLockerPosition()));
+        assertNull(actualBag);
+
     }
     
     private List<Locker> createLockersByCapacities(List<Integer> capacities) {

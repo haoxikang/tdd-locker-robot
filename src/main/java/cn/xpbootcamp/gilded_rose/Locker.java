@@ -11,6 +11,8 @@ public class Locker {
 
     private int lockerPosition;
 
+    private Bag bag;
+
 
     public Locker(int capacity) {
         boxes = new ArrayList<>();
@@ -43,7 +45,7 @@ public class Locker {
 
         Box box = getAvailableBox();
         String id = box.save(bag);
-
+        this.bag = bag;
         return new Ticket(id, box.getBoxNumber(),lockerPosition);
     }
 
@@ -63,6 +65,20 @@ public class Locker {
         box.open();
 //        return "打开"+box.getBoxNumber()+"号箱子";
         return "取包成功";
+
+    }
+
+
+    public Bag takeBag(Ticket ticket) {
+
+        Box box = getUnavailableBoxById(ticket.getId());
+        if (box == null || ticket.isUsed()) {
+            return null;
+        }
+        ticket.check();
+        box.open();
+//        return "打开"+box.getBoxNumber()+"号箱子";
+        return bag;
 
     }
 
